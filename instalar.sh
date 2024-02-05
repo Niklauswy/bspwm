@@ -8,14 +8,7 @@ clear
 #--Identificar Distribución--#
 declare -f VERIF_DISTRIB
 function VERIF_DISTRIB()
-{	INXI=`inxi -S`
-	ID=`lsb_release -i`
-	RELEASE=`lsb_release -r`
-	if [[ $INXI = *Xfce* && $INXI = *21.10* && $INXI = *Ubuntu* ]]; then
-			inxi -S
-			sleep 2s
-			echo "#-------------------Sistema soportado, la instalación seguirá------------------#"
-			echo ""
+{	
 			ACTUALIZAR
 			BSPWM
 			KSUPERKEY
@@ -27,86 +20,8 @@ function VERIF_DISTRIB()
 			APPS_XFCE
 			PERSONA
 		
-		elif [[ $ID = "Distributor ID:	Pop" && $RELEASE = "Release:	21.10" ]]; then
-			inxi -S
 			sleep 2s
-			echo "#-------------------Sistema soportado, la instalación seguirá------------------#"
-			echo ""
-			ACTUALIZAR
-			BSPWM
-			KSUPERKEY
-			I3LOCK
-			ALACC
-			ZSH
-			PICOM
-			APPS
-			APPS_POP
-			PERSONA
-
-		elif [[ $INXI = *Xfce* && "Distributor ID:	Debian" && ($RELEASE = "Release:	testing" || $RELEASE = "Release:	11") ]]; then
-			inxi -S
-			sleep 2s
-			echo "#-------------------Sistema soportado, la instalación seguirá------------------#"
-			echo ""
-			ACTUALIZAR
-			BSPWM
-			KSUPERKEY
-			I3LOCK
-			ALACC
-			ZSH
-			PICOM
-			APPS
-			APPS_XFCE
-			PERSONA
-						
-		elif [[ $INXI = *GNOME* && $INXI = *21.10* && $INXI = *Ubuntu* ]]; then
-			inxi -S
-			sleep 2s
-			echo "#-------------------Sistema soportado, la instalación seguirá------------------#"
-			echo ""
-			ACTUALIZAR
-			BSPWM
-			KSUPERKEY
-			I3LOCK
-			ALACC
-			ZSH
-			PICOM
-			APPS
-			APPS_POP
-			PERSONA
-			
-		elif [[ $INXI = *GNOME* && "Distributor ID:	Debian" && ($RELEASE = "Release:	testing" || $RELEASE = "Release:	11") ]]; then
-			inxi -S
-			sleep 2s
-			echo "#-------------------Sistema soportado, la instalación seguirá------------------#"
-			echo ""
-			ACTUALIZAR
-			BSPWM
-			KSUPERKEY
-			I3LOCK
-			ALACC
-			ZSH
-			PICOM
-			APPS
-			APPS_POP
-			PERSONA
-			
-		elif [[ $INXI = *Arch* ]]; then
-			inxi -S
-			sleep 2s
-			echo "#-------------------Sistema soportado, la instalación seguirá------------------#"
-			echo ""
-			ACTUALIZAR_ARCH
-			BSPWM_ARCH
-			ZSH_ARCH
-			PICOM_ARCH
-			APPS_ARCH
-			PERSONA
-			
-		else	
-			NOTF_FALLA
-			sleep 3
-	fi
+            echo "La instalacion inciara"
 }
 
 #--Función: Actualizar sistema (base Debian)--#
@@ -126,15 +41,6 @@ function ACTUALIZAR(){
 				sleep 2s
 		}
 
-#--Función: Actualizar sistema (base Arch)--#
-declare -f ACTUALIZAR_ARCH
-function ACTUALIZAR_ARCH(){
-			echo "#-----------------------------Actualizar sistema-------------------------------#"
-				sudo pacman -Syyuu --noconfirm &&
-				clear &&
-			echo "#-----------------------------Sistema actualizado------------------------------#"
-				sleep 2s
-		}
 			
 #--Función: Instalar base BSPWM (base Debian)--#
 declare -f BSPWM
@@ -147,17 +53,6 @@ function BSPWM()
 				sleep 2s
 	}
 
-#--Función: Instalar base BSPWM (base Arch)--#
-declare -f BSPWM_ARCH
-function BSPWM_ARCH()
-	{
-			echo "#----------------------------Instalando base BSPWM-----------------------------#"
-				sudo pacman -S bspwm sxhkd rofi dunst xorg-xsetroot arandr --noconfirm &&
-				yay -S polybar --noconfirm &&
-				clear &&
-			echo "#----------------------------Base BSPWM instalada------------------------------#"
-				sleep 2s
-	}
 
 #--Función: Base Debian - Instalar ksuperkey (hacer posible llamar a rofi con la tecla super)--#
 declare -f KSUPERKEY
@@ -229,23 +124,6 @@ function ZSH()
 				sleep 2s
 	}
 	
-#--Función: Base Arch - Instalar ZSH (Terminal)--#
-declare -f ZSH_ARCH
-function ZSH_ARCH()
-	{
-			echo "#--------------------------------Habilitar ZSH---------------------------------#"
-			sudo pacman -S zsh cargo --noconfirm &&
-			chsh -s $(which zsh) &&
-			sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)" &&
-			cd &&
-			yay -S zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-theme-powerlevel10k --noconfirm &&
-			cp -rf /tmp/bspwm/home/.zshrc $HOME
-			cp -rf /tmp/bspwm/home/.p10k.zsh $HOME
-			clear &&
-			echo "#--------------------------------ZSH habilitado--------------------------------#"
-				sleep 2s
-	}
-	
 #--Función: Base Debian - Instalar Picom (Compositor)--#
 declare -f PICOM
 function PICOM()
@@ -263,63 +141,19 @@ function PICOM()
 				sleep 2s
 	}
 
-#--Función: Base Arch - Instalar Picom (Compositor)--#
-declare -f PICOM_ARCH
-function PICOM_ARCH()
-	{
-			echo "#------------------------------Habilitar PICOM---------------------------------#"
-			yay -S picom-jonaburg-git --noconfirm &&
-			clear &&
-			echo "#------------------------------PICOM habilitado--------------------------------#"
-				sleep 2s
-	}
 
 #--Función: Instalar aplicaciones complementarias (base Debian)--#
 declare -f APPS
 function APPS()
 	{
 			echo "#------------------------Instalar apps complementarias-------------------------#"
-			sudo apt install neofetch mousepad mpd mpc ncmpcpp cmatrix ranger xbacklight gpick light cava maim bmon nautilus htop feh lxappearance nitrogen geany dmenu nm-tray xfconf xsettingsd xfce4-power-manager zenity git ttf-mscorefonts-installer -y &&
+			sudo apt install neofetch cmatrix ranger xbacklight gpick light cava nautilus htop feh dmenu nm-tray xfconf xsettingsd xfce4-power-manager zenity git ttf-mscorefonts-installer -y &&
 			sudo systemctl disable mpd &&
 			clear &&
 			echo "#-----------------------Apps complementarias instaladas------------------------#"
 				sleep 2s
 	}
 
-#--Función: Instalar aplicaciones complementarias (base Arch)--#
-declare -f APPS_ARCH
-function APPS_ARCH()
-	{
-			echo "#------------------------Instalar apps complementarias-------------------------#"
-			sudo pacman -S alacritty zsh neofetch mousepad chromium mpd mpc ncmpcpp cmatrix ranger xorg-xbacklight gpick light maim bmon nautilus htop feh lxappearance nitrogen geany dmenu networkmanager xfconf xsettingsd xfce4-power-manager zenity git --noconfirm &&
-			yay -S i3lock-color ttf-ms-fonts cava nm-tray networkmanager-demnu-git --noconfirm &&
-			sudo systemctl disable mpd &&
-			clear &&
-			echo "#-----------------------Apps complementarias instaladas------------------------#"
-				sleep 2s
-	}
-
-#--Función: Instalar aplicaciones complementarias en Xubuntu--#
-declare -f APPS_XFCE
-function APPS_XFCE()
-	{
-			echo "#-------------------Instalar apps complementarias para XFCE--------------------#"
-			sudo apt install catfish baobab meld -y &&
-			clear &&
-			echo "#--------------------------Apps para XFCE instaladas---------------------------#"
-				sleep 2s
-	}
-	
-#--Función: Instalar aplicaciones complementarias en Pop!OS--#
-declare -f APPS_POP
-function APPS_POP()
-	{
-			echo "#------------------Instalar apps complementarias para GNOME--------------------#"
-			sudo apt install mate-polkit -y &&
-			clear &&
-			echo "#--------------------------Apps para GNOME instaladas--------------------------#"
-				sleep 2s
-	}
 	
 #--Función: Usar personalizaciones para: fonts, configs, iconos, temas, polybar, dunst y rofi--#
 declare -f PERSONA
@@ -371,3 +205,4 @@ function NOTF_FALLA()
 	clear
 			echo "#------------------Este asistente instalará bspwm en su máquina----------------#"
 	VERIF_DISTRIB
+
