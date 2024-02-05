@@ -54,8 +54,8 @@ i3lock \
 --time-size=34													\
 --date-size=18													\
 --greeter-color=${CYAN}				\
---verif-text="verifying..."			\
---wrong-text="wrong!"				\
+--verif-text="ReviSAndooooo..."			\
+--wrong-text="Hmmmmmm NO es!"				\
 --noinput-text="Empty"				\
 --lock-text="Locking..."			\
 --lockfailed-text="Failed to lock"	\
@@ -66,5 +66,5 @@ i3lock \
 --indicator					\
 --time-str="%I:%M %p"		\
 --date-str="%b %d, %G"		\
---blur 5					\
+--blur 10					\
 #--greeter-text="${TOTD}"			\

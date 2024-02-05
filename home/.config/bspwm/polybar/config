@@ -14,7 +14,7 @@ include-file = ~/.config/bspwm/polybar/colors
 include-file = ~/.config/bspwm/polybar/modules
 
 [bar/main]
-monitor =
+monitor = eDP-1
 monitor-strict = false
 override-redirect = false
 
@@ -45,12 +45,11 @@ module-margin-right = 0
 
 font-0 = "Iosevka Nerd Font:size=10;3"
 font-1 = "Iosevka Nerd Font:size=12;3"
-font-2 = "google\-mdi:size=12;3"
-font-3 = "Iosevka:style=bold:"size=12;3"
+font-2 = "Iosevka:style=bold:"size=12;3"
 
 modules-left = bspwm
-modules-center = title
-modules-right = ethernet sep temperature sep cpu sep memory sep volume sep date
+modules-center = title 
+modules-right = ethernet sep temperature sep cpu sep memory sep volume sep date sep battery
 
 separator =
 spacing = 0
@@ -63,7 +62,6 @@ locale = es_VE.UTF-8
 tray-position = right
 tray-detached = true
 tray-maxsize = 16
-tray-transparent = false
 tray-background = ${color.BACKGROUND}
 tray-offset-x = -5
 tray-offset-y = 0
@@ -77,6 +75,72 @@ enable-ipc = true
 ; bspwm
 scroll-up = bspc desktop -f prev.local
 scroll-down = bspc desktop -f next.local
+
+
+[bar/otramain]
+monitor = HDMI-1
+monitor-strict = false
+override-redirect = false
+
+bottom = false
+fixed-center = true
+
+width = 99.3%
+height = 24
+offset-x = 5
+offset-y = 5
+
+background = ${color.BACKGROUND}
+foreground = ${color.FOREGROUND}
+
+radius-top = 0.0
+radius-bottom = 0.0
+
+line-size = 2
+line-color = ${color.BLUE}
+
+border-size = 4
+border-color = ${color.BACKGROUND}
+
+padding = 1
+padding-right = 14
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = "Iosevka Nerd Font:size=10;3"
+font-1 = "Iosevka Nerd Font:size=12;3"
+font-2 = "Iosevka:style=bold:"size=12;3"
+
+modules-left = bspwm
+modules-center = 
+modules-right = 
+
+separator =
+spacing = 0
+
+dim-value = 1.0
+
+wm-name = bspwm
+locale = es_VE.UTF-8
+
+tray-position = right
+tray-detached = true
+tray-maxsize = 16
+tray-background = ${color.BACKGROUND}
+tray-offset-x = -5
+tray-offset-y = 0
+tray-padding = 0
+tray-scale = 1.0
+
+wm-restack = bspwm
+
+enable-ipc = true
+
+; bspwm
+scroll-up = bspc desktop -f prev.local
+scroll-down = bspc desktop -f next.local
+
+
 
 [settings]
 throttle-output = 5

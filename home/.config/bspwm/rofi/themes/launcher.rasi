@@ -22,24 +22,18 @@ configuration {
 
 * {
     font:                           "Iosevka 10";
-    background-color:             	@background;
+    background-color:             	@transparent;
 }
 
 window {
-    border: 						1px;
+    
+    border: 						0px;
     border-color: 					@selected;
-    border-radius: 					0px;
-    width: 							500px;
-    height: 						0px;
+    border-radius: 					10px;
+    width: 							640;
+    height: 						600px;
 }
 
-prompt {
-    spacing: 						0;
-    border: 						0;
-    background-color:             	@highlight;
-    text-color: 					@background;
-    padding:    					6px 10px 6px 10px;
-}
 
 textbox-prompt-colon {
     expand: 						false;
@@ -67,7 +61,8 @@ case-indicator {
 }
 
 inputbar {
-    spacing:    					0px;
+    spacing:    					12px;
+    padding:                        12px;
     text-color: 					@foreground;
     border: 						0px;
     border-color: 					@selected;
@@ -80,6 +75,7 @@ mainbox {
     border-color: 					@selected;
     spacing: 						6px;
     padding: 						10px;
+    
 }
 
 listview {
@@ -103,41 +99,42 @@ element {
     padding: 						7px;
 }
 element normal.normal {
-    background-color: 				@background;
+    background-color: 				@transparent;
     text-color:       				@foreground;
 }
 element normal.urgent {
-    background-color: 				@background;
+    background-color: 				@transparent;
     text-color:       				@off;
 }
 element normal.active {
-    background-color: 				@background;
+    background-color: 				@transparent;
     text-color:       				@on;
 }
 element selected.normal {
     background-color: 				@selected;
-    text-color:       				@background;
-    border: 						0px;
-    border-color: 					@selected;
+    text-color:       				@black;
+    border: 						1px;
+    border-radius: 					10px;
+
 }
 element selected.urgent {
-    background-color: 				@background;
+    background-color: 				@transparent;
     text-color:       				@off;
 }
 element selected.active {
-    background-color: 				@background;
+    background-color: 				@transparent;
     text-color:       				@selected;
 }
 element alternate.normal {
-    background-color: 				@background;
+    background-color: 				@transparent;
     text-color:       				@foreground;
 }
 element alternate.urgent {
-    background-color: 				@background;
+    background-color: 				@transparent;
     text-color:       				@foreground;
 }
 element alternate.active {
-    background-color: 				@background;
+    background-color: 				@transparent;
     text-color:       				@foreground;
 }
 
@@ -160,7 +157,7 @@ button {
 
 button selected {
     background-color:             	@selected;
-    text-color: 					@background;
+    text-color: 					@transparent;
     border: 						0px;
     border-radius: 					0px;
     border-color: 					@selected;

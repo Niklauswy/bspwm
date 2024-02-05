@@ -7,13 +7,12 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="$HOME/.cargo/bin:$PATH"
-
+export PATH="/opt/nvim/bin:$PATH"
+export PATH="$HOME/.local/share/JetBrains/Toolbox/apps:$PATH"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export FZF_DEFAULT_COMMAND='find . -type f'
 
-#Path pip
-export PATH="$HOME/.local/bin:$PATH"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -81,13 +80,15 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+
 plugins=(
-	git
-	zsh-syntax-highlighting
-	zsh-autosuggestions
-)
+	sudo copypath copybuffer zsh-autosuggestions 
+	zsh-syntax-highlighting aliases web-search dirhistory
+) 
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/.gh-completion.zsh
+
 
 # User configuration
 
@@ -97,21 +98,16 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='nvim'
- else
-   export EDITOR='nvim'
- fi
-
-# Colorls
-
-if [ -x "$(command -v colorls)" ]; then
-    alias ls="colorls"
-    alias la="colorls -al"
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+
+#----------------------------------ALIAS------------------------------------------
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -119,9 +115,48 @@ fi
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
- alias zshconfig="nvim ~/.zshrc"
- alias ohmyzsh="nvim ~/.oh-my-zsh"
- alias p10kconfig="nvim ~/.p10k.zsh"
+alias zshconfig="nano ~/.zshrc"
+alias vimconfig="nano ~/.config/nvim/init.vim"
+# alias ohmyzsh=" ~/.oh-my-zsh"
+
+alias cat="batcat"
+alias cpath="copypath"
+alias cfile="clipcopy $1"
+
+
+alias ls='lsd'
+alias vim='nvim'
+
+
+alias ghs="gh copilot suggest"
+alias ghe="gh copilot explain"
+#---------------------------------------------------------------------------------
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+source ~/.gh-completion.zsh
+
+fzf_cd() {
+    local dir
+    dir=$(find . -type d | fzf) && cd "$dir"
+    ls
+}
+zle -N fzf_cd
+bindkey '^q' fzf_cd
+
+fzf_file() {
+    local file
+    file=$(find . -type f | fzf)
+    if [[ -n $file ]]; then
+        vim "$file" < /dev/tty
+    fi
+}
+zle -N fzf_file
+bindkey '^w' fzf_file
+
+                                                                                         
+
+

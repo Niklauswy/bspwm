@@ -511,7 +511,7 @@ ramp-signal-foreground = ${color.CYAN}
 
 [module/sep]
 type = custom/text
-content = ◆
+content = {}
 
 content-background = ${color.BACKGROUND}
 content-foreground = ${color.BLACK}
@@ -526,7 +526,7 @@ format = <label>
 format-prefix = " "
 format-prefix-foreground = ${color.BLUE}
 format-padding = 1
-format-foreground = ${color.foreground-alt}
+format-foreground = ${color.BLUE}
 
 label = " %title%"
 label-maxlen = 30

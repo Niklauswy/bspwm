@@ -12,7 +12,7 @@ theme_1=" Beach"
 theme_2=" Blade"
 theme_3=" Bouquet"
 theme_4=" Cyberpunk"
-theme_5=" Dracula"
+theme_5=" Macos"
 theme_6=" Flowers"
 theme_7=" Forest"
 theme_8=" Groot"
@@ -28,7 +28,6 @@ theme_17=" Rick"
 theme_18=" Spark"
 theme_19=" Tealize"
 theme_20=" Wave"
-
 # Variable passed to rofi
 options="$theme_1
 $theme_2
@@ -66,7 +65,7 @@ case $chosen in
         bash ${BSP}/set-theme  'cyberpunk.jpg' 'cyberpunk' 'Cyberpunk' 'Archcraft-Dark' 'LyraB' 'delt-dark.conf'
         ;;
     $theme_5)
-        bash ${BSP}/set-theme  'dracula.png' 'dracula' 'Dracula' 'Nordic-Folders' 'Sweet' 'inkpot.conf'
+        bash ${BSP}/set-theme  'macos.jpg' 'dracula' 'Dracula' 'Nordic-Folders' 'Sweet' 'inkpot.conf'
         ;;
     $theme_6)
         bash ${BSP}/set-theme  'flowers.jpg' 'flowers' 'Kripton' 'Zafiro' 'Fluent-dark' 'spider-dark.conf'

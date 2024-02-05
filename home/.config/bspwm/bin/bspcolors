@@ -97,6 +97,7 @@ bsprofi () {
 		urgent:				${RED};
 		on:					${GREEN};
 		off:				${RED};
+		transparent: 		#00000000;
 	}
 	EOF
 }
