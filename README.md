@@ -8,7 +8,7 @@ En su terminal, ejecute el comando de abajo para iniciar la instalación:
 
 ## Base Debian 
 ```bash
-sudo apt install lsb-release git inxi -y && cd /tmp && git clone https://github.com/niklaustein/bspwm && chmod 755 bspwm/* -R && cd bspwm/ && ./instalar.sh
+cd /tmp && git clone https://github.com/niklaustein/bspwm && chmod 755 bspwm/* -R && cd bspwm/ && ./instalar.sh
 ```
 
 
