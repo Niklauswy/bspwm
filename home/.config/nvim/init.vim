@@ -214,3 +214,13 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 let g:ale_linters = {
 \   'tex': ['chktex'],
 \}
+
+"====================COMPILAR gcc ==========================================="
+function! Compilar()
+    let args = input('Argunmentos: ')
+    execute ':w'
+    execute '!gcc % -o %< && ./%< ' . args
+endfunction
+
+nnoremap <C-Space> :call Compilar()<CR>
+
