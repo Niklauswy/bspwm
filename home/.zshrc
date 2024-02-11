@@ -84,6 +84,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(
 	sudo copypath copybuffer zsh-autosuggestions 
 	zsh-syntax-highlighting aliases web-search dirhistory
+	fancy-ctrl-z
 ) 
 
 source $ZSH/oh-my-zsh.sh
