@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+ #!/usr/bin/env bash
 # Desenvolvido pelo William Santos
 # contato: thespation@gmail.com ou https://github.com/thespation
 # Traducido y modificado por: Alejandro Fermín https://github.com/lostalejandro
@@ -20,7 +20,7 @@ function VERIF_DISTRIB()
 			APPS_XFCE
 			PERSONA
 			sleep 2s
-            echo "La instalacion inciara"
+            echo "La instalacion inciara en 2 diassssss:)"
 }
 
 #--Función: Actualizar sistema (base Debian)--#
@@ -96,31 +96,13 @@ function ZSH()
 			git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k &&
 			git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting &&
 			git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions &&
-			cd &&
-			cp -rf /tmp/bspwm/home/.zshrc $HOME
-			cp -rf /tmp/bspwm/home/.p10k.zsh $HOME
+			
 			clear &&
 			echo "#--------------------------------ZSH habilitado--------------------------------#"
 				sleep 2s
 	}
 	
-#--Función: Base Debian - Instalar Picom (Compositor)--#
-declare -f PICOM
-function PICOM()
-	{
-			echo "#------------------------------Habilitar PICOM---------------------------------#"
-			sudo apt install gcc meson ninja-build python3 cmake pkg-config libpcre3 libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev -y &&
-			sudo apt install libconfig-dev libdbus-1-dev libegl-dev libev-dev libgl-dev libpcre2-dev libpixman-1-dev libx11-xcb-dev libxcb1-dev libxcb-composite0-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-image0-dev libxcb-present-dev libxcb-randr0-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-util-dev libxcb-xfixes0-dev libxext-dev meson ninja-build uthash-dev &&
-cd $HOME/.config 
-git clone https://github.com/FT-Labs/picom 
-cd picom
-meson setup --buildtype=release build
-ninja -C build
-ninja -C build install
-			clear &&
-			echo "#------------------------------PICOM habilitado--------------------------------#"
-				sleep 2s
-	}
+
 
 
 #--Función: Instalar aplicaciones complementarias (base Debian)--#
@@ -128,7 +110,7 @@ declare -f APPS
 function APPS()
 	{
 			echo "#------------------------Instalar apps complementarias-------------------------#"
-			sudo apt install neofetch cmatrix flameshot gnome-terminal ranger xbacklight gpick light cava nautilus htop feh dmenu nm-tray xfconf xsettingsd xfce4-power-manager zenity git ttf-mscorefonts-installer bat -y &&
+			sudo apt install xsel neofetch cmatrix flameshot gnome-terminal ranger xbacklight gpick light cava nautilus htop feh dmenu nm-tray xfconf xsettingsd xfce4-power-manager zenity git ttf-mscorefonts-installer bat -y &&
 			sudo systemctl disable mpd &&
    			#Jetbrains Font
 			/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)" &&
@@ -169,6 +151,8 @@ function PERSONA()
 				cp -rf /tmp/bspwm/home/.xsettingsd $HOME
 				cp -rf /tmp/bspwm/home/.dmrc $HOME
 				cp -rf /tmp/bspwm/home/.fehbg $HOME
+				cp -rf /tmp/bspwm/home/.zshrc $HOME
+		  	    cp -rf /tmp/bspwm/home/.p10k.zsh $HOME
 				
 			clear &&
 			echo "#---------------------Personalizaciones principales copiadas-------------------#"
@@ -176,6 +160,26 @@ function PERSONA()
 			clear
 			NOTF_SUCESS
 	}
+
+#--Función: Base Debian - Instalar Picom (Compositor)--#
+declare -f PICOM
+function PICOM()
+	{
+			echo "#------------------------------Habilitar PICOM---------------------------------#"
+			sudo apt install gcc meson ninja-build python3 cmake libepoxy-dev pkg-config libpcre3 libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev -y &&
+			sudo apt install libconfig-dev libdbus-1-dev libegl-dev libev-dev libgl-dev libpcre2-dev libpixman-1-dev libx11-xcb-dev libxcb1-dev libxcb-composite0-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-image0-dev libxcb-present-dev libxcb-randr0-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-util-dev libxcb-xfixes0-dev libxext-dev meson ninja-build uthash-dev &&
+			cd $HOME/.config/
+			git clone https://github.com/FT-Labs/picom 
+			cd picom
+			meson setup --buildtype=release build
+			ninja -C build
+			ninja -C build install
+			cp /tmp/bspwm/home/.config/bspwm/picom.conf .
+			clear &&
+			echo "#------------------------------PICOM habilitado--------------------------------#"
+				sleep 2s
+	}
+
 	
 #--Función: Notificar operacion exitosa--#
 declare -f NOTF_SUCESS
