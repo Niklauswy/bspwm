@@ -19,7 +19,6 @@ function VERIF_DISTRIB()
 			APPS
 			APPS_XFCE
 			PERSONA
-		
 			sleep 2s
             echo "La instalacion inciara"
 }
@@ -38,11 +37,11 @@ function ACTUALIZAR(){
 			sudo apt dist-upgrade -y && sudo apt autoclean && sudo apt autoremove -y &&
 				clear &&
 			echo "#-----------------------------Sistema actualizado------------------------------#"
-				sleep 2s
+				sleep 5s
 		}
 
 			
-#--Función: Instalar base BSPWM (base Debian)--#
+#--Función: Instalar base BSPWM--#
 declare -f BSPWM
 function BSPWM()
 	{
@@ -50,7 +49,7 @@ function BSPWM()
 				sudo apt install bspwm sxhkd rofi polybar dunst arandr -y &&
 				clear &&
 			echo "#----------------------------Base BSPWM instalada------------------------------#"
-				sleep 2s
+				sleep 5s
 	}
 
 
@@ -83,28 +82,9 @@ function I3LOCK()
 				sleep 2s
 	}
 
-#--Función: Base Debian - Instalar Alacritty (Terminal)--#
-declare -f ALACC
-function ALACC()
-	{
-			echo "#----------------------------Habilitar ALACRITTY-------------------------------#"
-			curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh &&
-			source $HOME/.cargo/env
-			sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 -y &&
-			cd /tmp
-			git clone https://github.com/alacritty/alacritty.git &&
-			cd /tmp/alacritty
-			cargo build --release
-			sudo cp /tmp/alacritty/target/release/alacritty /usr/local/bin && 
-			cd &&
-			cd /tmp/bspwm &&
-			sudo cp -rf /tmp/bspwm/apps/Alacritty.desktop /usr/share/applications
-			sudo cp -rf /tmp/bspwm/apps/Alacritty.svg /usr/share/pixmaps
-			clear &&
-			echo "#----------------------------ALACRITTY habilitado------------------------------#"
-				sleep 2s
-	}
-	
+
+
+
 #--Función: Base Debian - Instalar ZSH (Terminal)--#
 declare -f ZSH
 function ZSH()
@@ -148,29 +128,37 @@ declare -f APPS
 function APPS()
 	{
 			echo "#------------------------Instalar apps complementarias-------------------------#"
-			sudo apt install neofetch cmatrix ranger xbacklight gpick light cava nautilus htop feh dmenu nm-tray xfconf xsettingsd xfce4-power-manager zenity git ttf-mscorefonts-installer bat -y &&
+			sudo apt install neofetch cmatrix flameshot gnome-terminal ranger xbacklight gpick light cava nautilus htop feh dmenu nm-tray xfconf xsettingsd xfce4-power-manager zenity git ttf-mscorefonts-installer bat -y &&
 			sudo systemctl disable mpd &&
    			#Jetbrains Font
 			/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)" &&
 			#Plug NVIM
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' &&
-     			#LSD
-cargo install --git https://github.com/lsd-rs/lsd.git --branch master &&
-#FZF
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install &&
-#GH CLI
-type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
-&& sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
-&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
-&& sudo apt update \
-&& sudo apt install gh -y
+            sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' &&
+     		#LSD
+            cargo install --git https://github.com/lsd-rs/lsd.git --branch master &&
+			#FZF
+            git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+            ~/.fzf/install &&
+            #GH CLI
+            type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
+            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+            && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+            && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+            && sudo apt update \
+            && sudo apt install gh -y
+			
+			#Brave
+			sudo apt install curl
+			sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+
+			echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/>
+			sudo apt update
+			sudo apt install brave-browser
 
 			clear &&
 			echo "#-----------------------Apps complementarias instaladas------------------------#"
-				sleep 2s
+			sleep 2s
 	}
 
 	
@@ -206,7 +194,7 @@ function NOTF_SUCESS()
 		zenity --info --width 300 --text "Instalación exitosa. Para que todo funcione correctamente, es recomendable que reinicie su sistema."
 	}
 	
-#--Función: Notificar Falha na operação--#
+#--Función: Notificar Fallo--#
 declare -f NOTF_FALLA
 function NOTF_FALLA()
 	{
@@ -214,10 +202,6 @@ function NOTF_FALLA()
 			echo "#----------------------------Sistema no soportado------------------------------#"
 			echo "#--------Este script fue diseñado para correr en las siguientes distros:-------#"		
 			echo "#------------------Debian Bullseye o Bookworm (XFCE y GNOME)-------------------#"
-			echo "#-------------------------------Pop!_Os 21.10----------------------------------#"
-			echo "#---------------------------Ubuntu o Xubuntu 21.10-----------------------------#"
-			echo "#-----------------------------------ArchLinux----------------------------------#"
-			echo "#-En caso que esté usando- una de las mencionadas, debe tener 'inxi' instalado-#"
 	}
 		
 ##--------------------------------Funciones utilizadas en el script--------------------------------##
