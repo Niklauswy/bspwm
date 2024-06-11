@@ -8,7 +8,7 @@ BSP="$HOME/.config/bspwm/themes"
 rofi_command="rofi -theme $DIR/rofi/themes/themes.rasi"
 
 # Themes
-theme_1=" Beach"
+theme_1=" Dark W"
 theme_2=" Blade"
 theme_3=" Bouquet"
 theme_4=" Cyberpunk"
@@ -53,7 +53,7 @@ $theme_20"
 chosen="$(echo "$options" | $rofi_command -p "Temas disponibles: (20)" -dmenu -selected-row 0)"
 case $chosen in
     $theme_1)
-        bash ${BSP}/set-theme  'beach.jpg' 'beach' 'Arc-Lighter' 'Arc-Circle' 'Fluent' 'beach.conf'
+        bash ${BSP}/set-theme  'darkblue.jpg' 'beach' 'Arc-Lighter' 'Arc-Circle' 'Fluent' 'beach.conf'
         ;;
     $theme_2)
         bash ${BSP}/set-theme  'blade.jpg' 'blade' 'Blade' 'Nordic-Folders' 'LyraS' 'himbeere.conf'
