@@ -135,7 +135,7 @@ super + ctrl + {Left,Down,Up,Right}
  
 # Custom move/resize
 alt + super + {Left,Down,Up,Right}
-    /home/klaus/.config/bspwm/scripts/bspwm_resize {west,south,north,east}
+    /home/nico/.config/bspwm/scripts/bspwm_resize {west,south,north,east}
 # ------------------------------------------------------------------------------------------------
 
 
@@ -162,3 +162,7 @@ super + shift + b
 # Discord
 super + shift + d
 	discord
+# Screenshoot
+super + shift + s
+	flameshot gui
+
