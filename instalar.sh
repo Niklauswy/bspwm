@@ -122,6 +122,14 @@ function APPS()
 			#FZF
             git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
             ~/.fzf/install &&
+			#Node
+			curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash &&
+			nvm install 20
+			#Nvim
+			cd /tmp/bspwm
+			tar xzf nvim.tar.gz
+			mv nvim-linux nvim
+			sudo mv nvim /opt/
             #GH CLI
             type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
             curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
@@ -153,6 +161,7 @@ function PERSONA()
 				cp -rf /tmp/bspwm/home/.fehbg $HOME
 				cp -rf /tmp/bspwm/home/.zshrc $HOME
 		  	    cp -rf /tmp/bspwm/home/.p10k.zsh $HOME
+				
 				
 			clear &&
 			echo "#---------------------Personalizaciones principales copiadas-------------------#"
